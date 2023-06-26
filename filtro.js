@@ -8,9 +8,12 @@ const productos = [
   {nombre: "Zapato rojo", tipo: "zapato", color: "rojo", img: "./zapato-rojo.jpg"}
 ]
 
-const li = document.getElementsByName("lista-de-productos")
-const $i = document.querySelector('.input');
+//se cambia a getElementById
+const li = document.getElementById("lista-de-productos")
+//Input no es una clase, se quita el punto
+const $i = document.querySelector('input');
 
+//for para crear elementos dependiendo de la cantidad de productos
 for (let i = 0; i < productos.length; i++) {
   var d = document.createElement("div")
   d.classList.add("producto")
@@ -25,21 +28,28 @@ for (let i = 0; i < productos.length; i++) {
   d.appendChild(ti)
   d.appendChild(imagen)
 
-  li.appendChild(d)
+  li.appendChild(d);
 }
 
-displayProductos(productos)
+//Falta el ; y esta linea de codigo se quita ya que con ella no se hace el filtro
+//displayProductos(productos);
+
+//boton de filtro
 const botonDeFiltro = document.querySelector("button");
 
+//Cuando se da click al boton esta funcion se activa
 botonDeFiltro.onclick = function() {
   while (li.firstChild) {
     li.removeChild(li.firstChild);
   }
 
+  //A la constante texto se le asigna el valor del input
   const texto = $i.value;
+  //Imprimir el texto
   console.log(texto);
   const productosFiltrados = filtrado(productos, texto );
 
+  //For para generar div con los productos.
   for (let i = 0; i < productosFiltrados.length; i++) {
     var d = document.createElement("div")
     d.classList.add("producto")
@@ -58,6 +68,7 @@ botonDeFiltro.onclick = function() {
   }
 }
 
+//Filtro de texto, donde si el item incluye cierto texto este se filtra y se muestra en la pantalla
 const filtrado = (productos = [], texto) => {
   return productos.filter(item => item.tipo.includes(texto) || item.color.includes(texto));
 }  
